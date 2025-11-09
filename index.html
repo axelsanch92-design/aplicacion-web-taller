@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplicación Web Educativa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #0f172a;
+      color: #f1f5f9;
+    }
+
+    /* Banner Institucional */
+    .banner {
+      text-align: center;
+      padding: 30px 10px;
+      background: #0f172a;
+      border-bottom: 3px solid #334155;
+    }
+    .banner img {
+      max-width: 200px;
+      margin-bottom: 10px;
+    }
+    .banner h1 {
+      font-size: 1.8em;
+      color: #22d3ee;
+    }
+
+    /* Navegación */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      background: #334155;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Secciones */
+    section {
+      display: none;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      background: #1e293b;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .active {
+      display: block;
+    }
+
+    /* Botones y inputs */
+    input, button {
+      padding: 8px;
+      margin: 5px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background: #22d3ee;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #06b6d4;
+    }
+
+    /* Tabla alumnos */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      background: #0f172a;
+    }
+    th, td {
+      border: 1px solid #334155;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background: #334155;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- BANNER -->
+  <div class="banner">
+    <img src="ff4d4120-0abc-4f18-89a1-1843b9cf3d1d.png" alt="Logo IESA">
+    <h1>Instituto de Estudios Superiores Argentino</h1>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" onclick="mostrar('home')">Home</a>
+    <a href="#" onclick="mostrar('alumno')">Cargar Alumno</a>
+    <a href="#" onclick="mostrar('listado')">Listado de Alumnos</a>
+    <a href="#" onclick="mostrar('historia')">Historia Institucional</a>
+    <a href="#" onclick="mostrar('unidad6')">Unidad 6 – IA Generativa</a>
+  </nav>
+
+  <!-- HOME / CLIMA -->
+  <section id="home" class="active">
+    <h2>Clima Actual</h2>
+    <input type="text" id="ciudad" placeholder="Ingresa una ciudad">
+    <button onclick="buscarClima()">Buscar</button>
+    <div id="resultadoClima"></div>
+    <div id="mapa" style="margin-top:10px;"></div>
+  </section>
+
+  <!-- CARGAR ALUMNO -->
+  <section id="alumno">
+    <h2>Cargar Alumno</h2>
+    <form id="formAlumno">
+      <input type="text" id="nombre" placeholder="Nombre" required><br>
+      <input type="text" id="curso" placeholder="Curso" required><br>
+      <input type="email" id="email" placeholder="Email" required><br>
+      <button type="submit">Guardar</button>
+    </form>
+    <p id="msg"></p>
+  </section>
+
+  <!-- LISTADO DE ALUMNOS -->
+  <section id="listado">
+    <h2>Listado de Alumnos</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Curso</th>
+          <th>Email</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody id="tablaAlumnos"></tbody>
+    </table>
+  </section>
+
+  <!-- HISTORIA INSTITUCIONAL -->
+  <section id="historia">
+    <h2>Instituto de Estudios Superiores Argentino</h2>
+
+    <img src="ff4d4120-0abc-4f18-89a1-1843b9cf3d1d.png"
+         alt="Logo del IESA"
+         style="max-width:300px; display:block; margin:0 auto; margin-bottom:20px;">
+
+    <p>
+      El Instituto de Estudios Superiores Argentino (IESA) es un establecimiento 
+      terciario de enseñanza pública de gestión privada, fundado en 2003 en 
+      Posadas, Misiones. Brinda formación profesional de excelencia, promoviendo 
+      valores éticos, liderazgo, innovación y educación integral.
+    </p>
+  </section>
+
+  <!-- UNIDAD 6 -->
+  <section id="unidad6">
+    <h2>Unidad 6 – IA Generativa</h2>
+
+    <h3>¿Qué es la IA Generativa?</h3>
+    <p>
+      La IA generativa es una tecnología capaz de crear contenido como texto, imágenes, audio o código,
+      a partir de patrones aprendidos por modelos entrenados.
+    </p>
+
+    <h3>Herramientas</h3>
+    <ul>
+      <li>ChatGPT: generación de texto y código.</li>
+      <li>Copilot: asistencia inteligente para programación.</li>
+      <li>DALL·E: generación de imágenes con inteligencia artificial.</li>
+    </ul>
+
+    <h3>Ejemplo de Prompt</h3>
+    <pre>
+Genera un diseño web moderno con fondo degradado 
+y un formulario de contacto responsive.
+    </pre>
+
+    <h3>Reflexión Ética</h3>
+    <p>
+      El uso responsable de la IA implica transparencia, privacidad, seguridad de datos 
+      y reducción de sesgos.
+    </p>
+
+    <h3>Debate</h3>
+    <p>
+      La IA no reemplaza al desarrollador, sino que potencia su trabajo, automatizando tareas 
+      repetitivas y permitiendo enfocarse en la creatividad y la estrategia.
+    </p>
+  </section>
+
+  <script>
+    /* Cambiar secciones */
+    function mostrar(id) {
+      document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+
+    /* Guardado de alumnos */
+    const form = document.getElementById("formAlumno");
+    const tabla = document.getElementById("tablaAlumnos");
+    const msg = document.getElementById("msg");
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+
+      const alumno = {
+        nombre: document.getElementById("nombre").value.trim(),
+        curso: document.getElementById("curso").value.trim(),
+        email: document.getElementById("email").value.trim()
+      };
+
+      if (!alumno.nombre || !alumno.curso || !alumno.email) {
+        msg.textContent = "Complete todos los campos";
+        return;
+      }
+
+      let alumnos = JSON.parse(localStorage.getItem("alumnos")) || [];
+      alumnos.push(alumno);
+      localStorage.setItem("alumnos", JSON.stringify(alumnos));
+
+      msg.textContent = "Alumno guardado correctamente ✅";
+      form.reset();
+      mostrarAlumnos();
+    });
+
+    function mostrarAlumnos() {
+      let alumnos = JSON.parse(localStorage.getItem("alumnos")) || [];
+      tabla.innerHTML = "";
+
+      alumnos.forEach((a, i) => {
+        tabla.innerHTML += `
+          <tr>
+            <td>${a.nombre}</td>
+            <td>${a.curso}</td>
+            <td>${a.email}</td>
+            <td><button onclick="eliminar(${i})">Eliminar</button></td>
+          </tr>`;
+      });
+    }
+
+    function eliminar(index) {
+      let alumnos = JSON.parse(localStorage.getItem("alumnos")) || [];
+      alumnos.splice(index, 1);
+      localStorage.setItem("alumnos", JSON.stringify(alumnos));
+      mostrarAlumnos();
+    }
+
+    mostrarAlumnos();
+
+    /* Widget de clima */
+    async function buscarClima() {
+      const ciudad = document.getElementById("ciudad").value.trim();
+      if (!ciudad) return alert("Ingrese una ciudad");
+
+      try {
+        const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${ciudad}&count=1&language=es&format=json`);
+        const geoData = await geoRes.json();
+
+        const { latitude, longitude, name, country } = geoData.results[0];
+
+        const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
+        const weatherData = await weatherRes.json();
+        const clima = weatherData.current_weather;
+
+        document.getElementById("resultadoClima").innerHTML = `
+          <h3>${name}, ${country}</h3>
+          <p>Temperatura: ${clima.temperature}°C</p>
+          <p>Viento: ${clima.windspeed} km/h</p>
+        `;
+
+        document.getElementById("mapa").innerHTML = `
+          <iframe src="https://www.google.com/maps?q=${latitude},${longitude}&z=10&output=embed"></iframe>
+        `;
+      } catch {
+        document.getElementById("resultadoClima").innerHTML = "No se pudo obtener el clima.";
+      }
+    }
+  </script>
+
+</body>
+</html>
